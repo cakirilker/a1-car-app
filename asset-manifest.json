@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/automobile-app/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/automobile-app/static/js/main.d08e8f8a.chunk.js",
-    "main.js.map": "/automobile-app/static/js/main.d08e8f8a.chunk.js.map",
-    "runtime-main.js": "/automobile-app/static/js/runtime-main.0fdf6f63.js",
-    "runtime-main.js.map": "/automobile-app/static/js/runtime-main.0fdf6f63.js.map",
-    "static/js/2.19094cce.chunk.js": "/automobile-app/static/js/2.19094cce.chunk.js",
-    "static/js/2.19094cce.chunk.js.map": "/automobile-app/static/js/2.19094cce.chunk.js.map",
-    "index.html": "/automobile-app/index.html",
-    "precache-manifest.b13c19b2d04da40f14261b7d8b4bdb06.js": "/automobile-app/precache-manifest.b13c19b2d04da40f14261b7d8b4bdb06.js",
-    "service-worker.js": "/automobile-app/service-worker.js",
-    "static/css/main.5ecd60fb.chunk.css.map": "/automobile-app/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.19094cce.chunk.js.LICENSE.txt": "/automobile-app/static/js/2.19094cce.chunk.js.LICENSE.txt"
+    "main.css": "/a1-car-app/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/a1-car-app/static/js/main.bacb0e4b.chunk.js",
+    "main.js.map": "/a1-car-app/static/js/main.bacb0e4b.chunk.js.map",
+    "runtime-main.js": "/a1-car-app/static/js/runtime-main.724f3bdc.js",
+    "runtime-main.js.map": "/a1-car-app/static/js/runtime-main.724f3bdc.js.map",
+    "static/js/2.19094cce.chunk.js": "/a1-car-app/static/js/2.19094cce.chunk.js",
+    "static/js/2.19094cce.chunk.js.map": "/a1-car-app/static/js/2.19094cce.chunk.js.map",
+    "index.html": "/a1-car-app/index.html",
+    "precache-manifest.738bec17dce1295d29a8928dd60389ba.js": "/a1-car-app/precache-manifest.738bec17dce1295d29a8928dd60389ba.js",
+    "service-worker.js": "/a1-car-app/service-worker.js",
+    "static/css/main.5ecd60fb.chunk.css.map": "/a1-car-app/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.19094cce.chunk.js.LICENSE.txt": "/a1-car-app/static/js/2.19094cce.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.0fdf6f63.js",
+    "static/js/runtime-main.724f3bdc.js",
     "static/js/2.19094cce.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.d08e8f8a.chunk.js"
+    "static/js/main.bacb0e4b.chunk.js"
   ]
 }
