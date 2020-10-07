@@ -2,32 +2,34 @@ import React from 'react';
 import { CssBaseline, Container, createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
 import { Footer, Header } from './components';
-const theme = createMuiTheme({
-  overrides: {
-    MuiAppBar: {
-      root: { height: '80px', minHeight: '80px', maxHeight: '80px' },
-    },
-    MuiToolbar: {
-      root: {
-        height: 'inherit !important',
-        maxHeight: 'inherit !important',
-        minHeight: 'inherit !important',
-      },
-    },
-  },
-});
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import store from './store';
 
-function App() {
+const theme = createMuiTheme({});
+
+const Home = () => <Container>Hello</Container>;
+
+const Error404Page = () => <Container>404</Container>;
+
+const App = () => {
   return (
-    <div className="App">
+    <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Header />
-        <Container>Hello</Container>
-        <Footer />
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="*">
+              <Error404Page />
+            </Route>
+          </Switch>
+          <Footer />
+        </Router>
       </ThemeProvider>
-    </div>
+    </Provider>
   );
-}
+};
 
 export default App;
