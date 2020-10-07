@@ -5,10 +5,15 @@ import { Footer, Header } from './components';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import store from './store';
+import Home from './containers/Home';
 
-const theme = createMuiTheme({});
-
-const Home = () => <Container>Hello</Container>;
+const theme = createMuiTheme({
+  palette: {
+    background: {
+      default: '#fff',
+    },
+  },
+});
 
 const Error404Page = () => <Container>404</Container>;
 

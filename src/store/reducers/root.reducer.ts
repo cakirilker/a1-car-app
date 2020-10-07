@@ -1,9 +1,6 @@
 import { combineReducers } from 'redux';
+import carsReducer from '../reducers/cars.reducer';
 
-const initialState = {};
-
-const DummyReducer = (state = initialState, action: any) => state;
-
-export const RootReducer = combineReducers({ dummy: DummyReducer });
+export const RootReducer = combineReducers({ carStore: carsReducer });
 
 export type RootState = ReturnType<typeof RootReducer>;
