@@ -8,6 +8,7 @@ import {
   Link,
   createStyles,
 } from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +24,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     link: {
       margin: theme.spacing(1, 1.5),
+      textTransform: 'none',
+      '&:hover': {
+        color: '#EA7F28',
+      },
+      '&.active': {
+        color: '#EA7F28',
+      },
     },
   }),
 );
@@ -44,30 +52,35 @@ const Header = () => {
           noWrap
           className={classes.toolbarTitle}
         >
-          Company name
+          <Link color="inherit" component={NavLink} to="/">
+            Auto1 Group
+          </Link>
         </Typography>
         <nav>
           <Link
             variant="button"
             color="textPrimary"
-            href="#"
             className={classes.link}
+            component={NavLink}
+            to="/purchase"
           >
             Purchase
           </Link>
           <Link
             variant="button"
             color="textPrimary"
-            href="#"
             className={classes.link}
+            component={NavLink}
+            to="/orders"
           >
             My Orders
           </Link>
           <Link
             variant="button"
             color="textPrimary"
-            href="#"
             className={classes.link}
+            component={NavLink}
+            to="/sell"
           >
             Sell
           </Link>
