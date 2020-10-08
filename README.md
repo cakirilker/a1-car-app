@@ -1,3 +1,7 @@
+![Tests](https://github.com/cakirilker/a1-car-app/workflows/Tests/badge.svg)
+
+![Build and Deploy](https://github.com/cakirilker/a1-car-app/workflows/Build%20and%20Deploy/badge.svg)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
