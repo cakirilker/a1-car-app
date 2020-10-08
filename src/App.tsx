@@ -22,7 +22,7 @@ const App = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <Header />
           <Switch>
             <Route exact path="/" component={Home} />

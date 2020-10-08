@@ -1,21 +1,21 @@
-import { GET_CARS, SET_LOADING } from '../../constants';
+import { GET_CARS, SET_ERROR, SET_LOADING } from '../../constants';
 import { Car } from '../../constants/interfaces';
 import { CarsActionTypes } from '../actions/types';
 
 export type CarsState = Readonly<{
-  cars: Array<Car>;
+  data: Array<Car>;
   totalPageCount: number;
   totalCarsCount: number;
   loading: Boolean;
-  error: null;
+  error: Boolean;
 }>;
 
 const initialState: CarsState = {
-  cars: [],
+  data: [],
   totalCarsCount: 0,
   totalPageCount: 0,
   loading: false,
-  error: null,
+  error: false,
 };
 
 export default (
@@ -23,10 +23,21 @@ export default (
   action: CarsActionTypes,
 ): CarsState => {
   switch (action.type) {
-    case GET_CARS:
-      return { ...state, ...action.payload, loading: false, error: null };
+    case GET_CARS: {
+      const { cars: data, totalCarsCount, totalPageCount } = action.payload;
+      return {
+        ...state,
+        data,
+        totalCarsCount,
+        totalPageCount,
+        loading: false,
+        error: false,
+      };
+    }
     case SET_LOADING:
-      return { ...state, loading: action.payload };
+      return { ...state, loading: action.payload, error: false };
+    case SET_ERROR:
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }

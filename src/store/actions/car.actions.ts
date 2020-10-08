@@ -1,7 +1,7 @@
+import { ActionCreator } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { GET_CARS, SET_ERROR, SET_LOADING } from '../../constants';
 import { CarsResponse, CarsRequest } from '../../constants/interfaces';
-// import { CarsActionTypes } from '../reducers/cars.reducer';
 import { RootState } from '../reducers/root.reducer';
 import { CarsActionTypes } from './types';
 
@@ -20,21 +20,15 @@ export const setErrorAction = (payload: Boolean): CarsActionTypes => ({
   payload,
 });
 
-export const getCars = (
-  options: CarsRequest,
-): ThunkAction<void, RootState, any, CarsActionTypes> => (
-  dispatch,
-  getState,
-  api,
-) => {
+export const getCars: ActionCreator<ThunkAction<
+  Promise<CarsActionTypes>,
+  RootState,
+  null,
+  CarsActionTypes
+>> = (options?: CarsRequest) => (dispatch, getState, api: any) => {
   dispatch(setLoadingAction(true));
-  api
+  return api
     .getCars(options)
-    .then((response: CarsResponse) => {
-      dispatch(getCarsAction(response));
-      return Promise.resolve(response);
-    })
-    .catch((err: any) => {
-      dispatch(setErrorAction(err));
-    });
+    .then((response: CarsResponse) => dispatch(getCarsAction(response)))
+    .catch((err: any) => dispatch(setErrorAction(true)));
 };

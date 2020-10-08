@@ -1,5 +1,5 @@
 import React from 'react';
-import { AutomobileList } from '../components';
+import { CarList } from '../components';
 import {
   Grid,
   Paper,
@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Home = () => {
   const classes = useStyles();
-
   return (
     <Container className={classes.root}>
       <Grid container spacing={2}>
@@ -36,7 +35,7 @@ const Home = () => {
             elevation={0}
             square
           >
-            <AutomobileList />
+            <CarList />
           </Paper>
         </Grid>
       </Grid>

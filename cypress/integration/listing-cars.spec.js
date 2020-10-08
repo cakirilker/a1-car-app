@@ -31,7 +31,7 @@ describe('Listing Cars', () => {
     cy.server({ force404: true });
     cy.route({
       method: 'GET',
-      url: 'https://auto1-mock-server.herokuapp.com/api/cars',
+      url: 'https://auto1-mock-server.herokuapp.com/api/cars**',
       response: {
         cars: cars,
         totalPageCount: 1,
