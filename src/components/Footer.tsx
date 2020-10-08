@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme: Theme) =>
       borderTop: `1px solid ${theme.palette.divider}`,
       marginTop: theme.spacing(8),
       padding: theme.spacing(2),
+      height: 80,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   }),
 );

@@ -3,12 +3,13 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  makeStyles,
   Theme,
   Link,
+  makeStyles,
   createStyles,
 } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
+import Auto1Logo from '../images/logo.png';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,6 +33,9 @@ const useStyles = makeStyles((theme: Theme) =>
         color: '#EA7F28',
       },
     },
+    brandImage: {
+      margin: '10px 0',
+    },
   }),
 );
 
@@ -52,10 +56,15 @@ const Header = () => {
           noWrap
           className={classes.toolbarTitle}
         >
-          <Link color="inherit" component={NavLink} to="/">
-            Auto1 Group
-          </Link>
+          <NavLink to="/">
+            <img
+              src={Auto1Logo}
+              alt="Auto1 Logo"
+              className={classes.brandImage}
+            />
+          </NavLink>
         </Typography>
+
         <nav>
           <Link
             variant="button"
