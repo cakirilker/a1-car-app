@@ -1,5 +1,5 @@
 import React from 'react';
-import { CarList } from '../components';
+import { CarList, Filters } from '../components';
 import {
   Grid,
   Paper,
@@ -25,7 +25,7 @@ const Home = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={4}>
           <Paper variant="outlined" square>
-            X
+            <Filters />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12} md={8}>

@@ -3,12 +3,13 @@ import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '../store/reducers/root.reducer';
 import { getCars } from '../store/actions/car.actions';
 import CarListItem, { CarListItemSkeleton } from './CarListItem';
-import Pagination from '@material-ui/lab/Pagination/Pagination';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Alert, Pagination } from '@material-ui/lab';
 
 const mapStateToProps = (state: RootState) => ({
   cars: state.cars.data,
   loading: state.cars.loading,
+  error: state.cars.error,
   totalCarsCount: state.cars.totalCarsCount,
   totalPageCount: state.cars.totalPageCount,
 });
@@ -41,6 +42,7 @@ export const CarList = ({
   getCars,
   cars,
   loading,
+  error,
   totalCarsCount,
   totalPageCount,
 }: Props) => {
@@ -64,6 +66,7 @@ export const CarList = ({
       <Typography variant="h6" component="h1">
         {`Showing ${cars.length} of ${totalCarsCount} results`}
       </Typography>
+      {error && <Alert severity="error">An error has occured.</Alert>}
       {loading
         ? Array(3)
             .fill(0)

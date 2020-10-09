@@ -3,6 +3,7 @@ import { render, RenderResult } from '@testing-library/react';
 import { CarList } from '../CarList';
 import { Car } from '../../constants/interfaces';
 import { BrowserRouter as Router } from 'react-router-dom';
+
 // TODO: RenderResult type stays as any, need to find to fix it.
 describe('CarList Component', () => {
   const cars: Array<Car> = [
@@ -41,6 +42,7 @@ describe('CarList Component', () => {
         getCars={getCars}
         cars={cars}
         loading={false}
+        error={false}
         totalCarsCount={cars.length}
         totalPageCount={Math.ceil(cars.length / 10)}
         {...props}
@@ -66,7 +68,6 @@ describe('CarList Component', () => {
     });
 
     test('should not display skeletons', () => {
-      renderWithProps();
       const { queryByTestId } = context;
       expect(queryByTestId('car-item-skeleton')).toBeNull();
     });
@@ -77,11 +78,27 @@ describe('CarList Component', () => {
       expect(queryByText(firstCarHeader)).not.toBeNull();
     });
 
-    test.todo('should not display the error message');
+    test('should not display the error message', () => {
+      const { queryByText } = context;
+      expect(queryByText('An error has occured.')).toBeNull();
+    });
 
     test('should display correct header', () => {
       const { queryByText } = context;
       expect(queryByText('Showing 2 of 2 results')).not.toBeNull();
+    });
+  });
+
+  describe('when fetching fails', () => {
+    test('should display error message', () => {
+      renderWithProps({
+        error: true,
+        cars: [],
+        totalCarsCount: 0,
+        totalPageCount: 0,
+      });
+      const { queryByText } = context;
+      expect(queryByText('An error has occured.')).not.toBeNull();
     });
   });
 });
