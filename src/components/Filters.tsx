@@ -82,11 +82,7 @@ export const Filters = ({
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
       <InputLabel id="color-filter-input-label">Color</InputLabel>
-      <FormControl
-        variant="outlined"
-        className={classes.formControl}
-        data-testid="color-filter-input"
-      >
+      <FormControl variant="outlined" className={classes.formControl}>
         <Select
           id="color-filter-input-select"
           data-testid="color-filter-input-select"
