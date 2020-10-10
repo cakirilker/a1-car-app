@@ -56,7 +56,7 @@ export const CarList = ({
 
   useEffect(() => {
     getCars();
-  }, []);
+  }, [getCars]);
 
   const handlePaginationChange = (
     event: React.ChangeEvent<unknown>,
