@@ -33,18 +33,22 @@ describe('CarList Component', () => {
     },
   ];
   let getCars: jest.Mock;
+  let setFilters: jest.Mock;
   let context: RenderResult;
 
   const renderWithProps = (props?: unknown) => {
     getCars = jest.fn(() => Promise.resolve()).mockName('getCars');
+    setFilters = jest.fn(() => Promise.resolve()).mockName('setFilters');
     context = render(
       <CarList
         getCars={getCars}
+        setFiltersAction={setFilters}
         cars={cars}
         loading={false}
         error={false}
         totalCarsCount={cars.length}
         totalPageCount={Math.ceil(cars.length / 10)}
+        filters={{ page: 1, sort: 'asc' }}
         {...props}
       />,
       { wrapper: Router },

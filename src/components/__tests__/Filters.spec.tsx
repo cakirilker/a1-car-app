@@ -8,6 +8,7 @@ describe('Filters Component', () => {
   let loadColors: jest.Mock;
   let loadManufacturers: jest.Mock;
   let getCars: jest.Mock;
+  let setFilters: jest.Mock;
   let context: RenderResult;
 
   describe('Color filter', () => {
@@ -19,6 +20,7 @@ describe('Filters Component', () => {
         .fn(() => Promise.resolve())
         .mockName('loadManufacturers');
       getCars = jest.fn(() => Promise.resolve()).mockName('getCars');
+      setFilters = jest.fn(() => Promise.resolve()).mockName('setFilters');
       context = render(
         <Filters
           colors={colors}
@@ -26,6 +28,8 @@ describe('Filters Component', () => {
           loadColors={loadColors}
           loadManufacturers={loadManufacturers}
           getCars={getCars}
+          filters={{ page: 1, sort: 'asc' }}
+          setFiltersAction={setFilters}
           {...props}
         />,
       );
@@ -46,5 +50,8 @@ describe('Filters Component', () => {
       expect(options).toHaveLength(8);
     });
     test.todo('should render only All car colors option with empty colors');
+    test.todo('should call setFilters whenever color changed');
+    test.todo('should call setFilters whenever manufacturer changed');
+    test.todo('should call getCars when Filter button pressed');
   });
 });

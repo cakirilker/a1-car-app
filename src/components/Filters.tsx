@@ -13,16 +13,19 @@ import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '../store/reducers/root.reducer';
 import { loadColors, loadManufacturers } from '../store/actions/filter.actions';
 import { getCars } from '../store/actions/car.actions';
+import { setFiltersAction } from '../store/actions/filter.actions';
 
 const mapStateToProps = (state: RootState) => ({
   colors: state.filters.colors,
   manufacturers: state.filters.manufacturers,
+  filters: state.filters.active,
 });
 
 const mapDispatchToProps = {
   loadColors,
   loadManufacturers,
   getCars,
+  setFiltersAction,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -50,24 +53,27 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Filters = ({
   colors,
   manufacturers,
+  filters,
   loadColors,
   loadManufacturers,
+  setFiltersAction,
   getCars,
 }: Props) => {
   const classes = useStyles();
-  const [color, setColor] = React.useState<string>('');
-  const [manufacturer, setManufacturer] = React.useState<string>('');
-
+  // const [color, setColor] = React.useState<string>('');
+  // const [manufacturer, setManufacturer] = React.useState<string>('');
+  const { manufacturer, color, sort } = filters;
   const handleColorChange = (event: React.ChangeEvent<{ value: unknown }>) =>
-    setColor(event.target.value as string);
+    setFiltersAction({ color: event.target.value as string });
 
   const handleManufacturerChange = (
     event: React.ChangeEvent<{ value: unknown }>,
-  ) => setManufacturer(event.target.value as string);
+  ) => setFiltersAction({ manufacturer: event.target.value as string });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    getCars({ color, manufacturer, page: 1, sort: 'asc' });
+    setFiltersAction({ page: 1 });
+    getCars({ color, manufacturer, page: 1, sort });
   };
   useEffect(() => {
     loadColors();
@@ -84,7 +90,7 @@ export const Filters = ({
         <Select
           id="color-filter-input-select"
           labelId="color-filter-input-label"
-          value={color}
+          value={color || ''}
           onChange={handleColorChange}
           displayEmpty
           className={classes.option}
@@ -109,7 +115,7 @@ export const Filters = ({
         <Select
           id="manufacturer-filter-input-select"
           labelId="manufacturer-filter-input-label"
-          value={manufacturer}
+          value={manufacturer || ''}
           onChange={handleManufacturerChange}
           displayEmpty
           className={classes.option}

@@ -1,15 +1,20 @@
-import { GET_MANUFACTURERS, GET_COLORS } from '../../constants';
-import { Manufacturer } from '../../constants/interfaces';
+import { GET_MANUFACTURERS, GET_COLORS, SET_FILTERS } from '../../constants';
+import { CarsRequest, Manufacturer } from '../../constants/interfaces';
 import { FilterActionTypes } from '../actions/types';
 
 export type FiltersState = Readonly<{
   colors: string[];
   manufacturers: Manufacturer[];
+  active: CarsRequest;
 }>;
 
 const initialState: FiltersState = {
   colors: [],
   manufacturers: [],
+  active: {
+    page: 1,
+    sort: 'asc',
+  },
 };
 
 export default (
@@ -21,6 +26,8 @@ export default (
       return { ...state, colors: action.payload };
     case GET_MANUFACTURERS:
       return { ...state, manufacturers: action.payload };
+    case SET_FILTERS:
+      return { ...state, active: { ...state.active, ...action.payload } };
     default:
       return state;
   }
