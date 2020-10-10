@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import {
+  Auto1API,
   CarsRequest,
   CarsResponse,
   Manufacturer,
@@ -9,7 +10,7 @@ const client = axios.create({
   baseURL: 'https://auto1-mock-server.herokuapp.com/api/',
 });
 
-const api = {
+const api: Auto1API = {
   getCars: (options: CarsRequest = { page: 1, sort: 'asc' }) =>
     client
       .get('/cars', { params: options })
@@ -19,7 +20,8 @@ const api = {
     client
       .get('/colors')
       .then(
-        (response: AxiosResponse<{ colors: Array<string> }>) => response.data,
+        (response: AxiosResponse<{ colors: Array<string> }>) =>
+          response.data.colors,
       ),
 
   getManufacturers: () =>
@@ -27,7 +29,7 @@ const api = {
       .get('/manufacturers')
       .then(
         (response: AxiosResponse<{ manufacturers: Array<Manufacturer> }>) =>
-          response.data,
+          response.data.manufacturers,
       ),
 };
 export default api;
