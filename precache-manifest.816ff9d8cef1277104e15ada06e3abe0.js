@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "037718730d8721190fe03b7ad0dcbc19",
+    "revision": "fe0fe20232fabfd8c47ec6268bcc5999",
     "url": "/a1-car-app/index.html"
   },
   {
-    "revision": "63352e20f7abb16faa3c",
+    "revision": "5672da526259da53cfad",
     "url": "/a1-car-app/static/css/main.45f9f73c.chunk.css"
   },
   {
-    "revision": "3d1380992f146eba3ed6",
-    "url": "/a1-car-app/static/js/2.9883f9fa.chunk.js"
+    "revision": "c51ee095566ac2d83473",
+    "url": "/a1-car-app/static/js/2.6f3d1b6a.chunk.js"
   },
   {
     "revision": "0749163b59fbee32225059cb60c18af6",
-    "url": "/a1-car-app/static/js/2.9883f9fa.chunk.js.LICENSE.txt"
+    "url": "/a1-car-app/static/js/2.6f3d1b6a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "63352e20f7abb16faa3c",
-    "url": "/a1-car-app/static/js/main.e43571bd.chunk.js"
+    "revision": "5672da526259da53cfad",
+    "url": "/a1-car-app/static/js/main.2c8e3b32.chunk.js"
   },
   {
     "revision": "7ce7fa8b62d6510be2ff",
