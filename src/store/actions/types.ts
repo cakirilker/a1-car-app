@@ -10,7 +10,6 @@ import {
   CarsRequest,
   CarsResponse,
   Manufacturer,
-  SortType,
 } from '../../constants/interfaces';
 import { Action } from 'redux';
 

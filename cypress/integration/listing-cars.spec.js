@@ -1,41 +1,15 @@
+import { cars } from '../../src/__mocks__/DATA';
+
 describe('Listing Cars', () => {
-  it('displays cars from the server', () => {
-    const cars = [
-      {
-        stockNumber: 29544,
-        manufacturerName: 'Mercedes-Benz',
-        modelName: 'Strich Acht',
-        color: 'white',
-        mileage: {
-          number: 100988,
-          unit: 'km',
-        },
-        fuelType: 'Diesel',
-        pictureUrl:
-          'https://auto1-js-task-api--mufasa71.repl.co/images/car.svg',
-      },
-      {
-        stockNumber: 39504,
-        manufacturerName: 'Mercedes-Benz',
-        modelName: 'CLS-Klasse',
-        color: 'silver',
-        mileage: {
-          number: 101029,
-          unit: 'km',
-        },
-        fuelType: 'Diesel',
-        pictureUrl:
-          'https://auto1-js-task-api--mufasa71.repl.co/images/car.svg',
-      },
-    ];
+  it('should display cars from the server', () => {
     cy.server({ force404: true });
     cy.route({
       method: 'GET',
       url: 'https://auto1-mock-server.herokuapp.com/api/cars**',
       response: {
         cars: cars,
-        totalPageCount: 1,
-        totalCarsCount: 2,
+        totalPageCount: 10,
+        totalCarsCount: 100,
       },
     });
     cy.visit('/');

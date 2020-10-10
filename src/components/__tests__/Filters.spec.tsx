@@ -2,20 +2,9 @@ import React from 'react';
 import { render, RenderResult } from '@testing-library/react';
 import { Filters } from '../Filters';
 import fireEvent from '@testing-library/user-event';
-import { Manufacturer } from '../../constants/interfaces';
+import { colors, manufacturers } from '../../__mocks__/DATA';
 
 describe('Filters Component', () => {
-  const colors = ['red', 'blue', 'green', 'black', 'yellow', 'white', 'silver'];
-  const manufacturers: Manufacturer[] = [
-    {
-      name: 'Audi',
-      models: [{ name: 'A8' }],
-    },
-    {
-      name: 'Fiat',
-      models: [{ name: 'Marea' }],
-    },
-  ];
   let loadColors: jest.Mock;
   let loadManufacturers: jest.Mock;
   let getCars: jest.Mock;
