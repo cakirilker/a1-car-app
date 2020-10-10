@@ -89,6 +89,7 @@ export const Filters = ({
       >
         <Select
           id="color-filter-input-select"
+          data-testid="color-filter-input-select"
           labelId="color-filter-input-label"
           value={color || ''}
           onChange={handleColorChange}
@@ -96,7 +97,7 @@ export const Filters = ({
           className={classes.option}
         >
           <MenuItem value="">
-            <span>All car colors</span>
+            <span>All Car Colors</span>
           </MenuItem>
           {colors.map(color => (
             <MenuItem
@@ -114,6 +115,7 @@ export const Filters = ({
       <FormControl variant="outlined" className={classes.formControl}>
         <Select
           id="manufacturer-filter-input-select"
+          data-testid="manufacturer-filter-input-select"
           labelId="manufacturer-filter-input-label"
           value={manufacturer || ''}
           onChange={handleManufacturerChange}
@@ -121,7 +123,7 @@ export const Filters = ({
           className={classes.option}
         >
           <MenuItem value="">
-            <span>All manufacturers</span>
+            <span>All Manufacturers</span>
           </MenuItem>
           {manufacturers.map(manufacturer => (
             <MenuItem
