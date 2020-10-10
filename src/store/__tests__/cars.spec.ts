@@ -3,7 +3,8 @@ import thunk from 'redux-thunk';
 import CarsReducer, { CarsState } from '../reducers/cars.reducer';
 import { getCars } from '../actions/car.actions';
 import { CarsActionTypes } from '../actions/types';
-import { Car, CarsResponse } from '../../constants/interfaces';
+import { CarsResponse } from '../../constants/interfaces';
+import { cars } from '../../__mocks__/DATA';
 
 describe('cars reducer', () => {
   describe('initial state', () => {
@@ -22,37 +23,8 @@ describe('cars reducer', () => {
     });
   });
 
-  describe('getCars action', () => {
+  describe('getCars Action', () => {
     describe('when fetching succeeds', () => {
-      const cars: Array<Car> = [
-        {
-          stockNumber: 29544,
-          manufacturerName: 'Mercedes-Benz',
-          modelName: 'Strich Acht',
-          color: 'white',
-          mileage: {
-            number: 100988,
-            unit: 'km',
-          },
-          fuelType: 'Diesel',
-          pictureUrl:
-            'https://auto1-js-task-api--mufasa71.repl.co/images/car.svg',
-        },
-        {
-          stockNumber: 39504,
-          manufacturerName: 'Mercedes-Benz',
-          modelName: 'CLS-Klasse',
-          color: 'silver',
-          mileage: {
-            number: 101029,
-            unit: 'km',
-          },
-          fuelType: 'Diesel',
-          pictureUrl:
-            'https://auto1-js-task-api--mufasa71.repl.co/images/car.svg',
-        },
-      ];
-
       const carsResponse: CarsResponse = {
         cars,
         totalCarsCount: 2,

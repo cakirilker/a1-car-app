@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '../store/reducers/root.reducer';
 import { getCars } from '../store/actions/car.actions';
+import { setFiltersAction } from '../store/actions/filter.actions';
 import CarListItem, { CarListItemSkeleton } from './CarListItem';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { Alert, Pagination } from '@material-ui/lab';
@@ -12,10 +13,12 @@ const mapStateToProps = (state: RootState) => ({
   error: state.cars.error,
   totalCarsCount: state.cars.totalCarsCount,
   totalPageCount: state.cars.totalPageCount,
+  filters: state.filters.active,
 });
 
 const mapDispatchToProps = {
   getCars,
+  setFiltersAction,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -40,13 +43,17 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const CarList = ({
   getCars,
+  setFiltersAction,
   cars,
   loading,
   error,
   totalCarsCount,
   totalPageCount,
+  filters,
 }: Props) => {
   const classes = useStyles();
+  const { page } = filters;
+
   useEffect(() => {
     getCars();
   }, []);
@@ -55,7 +62,8 @@ export const CarList = ({
     event: React.ChangeEvent<unknown>,
     value: number,
   ) => {
-    getCars({ page: value, sort: 'asc' });
+    setFiltersAction({ page: value });
+    getCars({ ...filters, page: value });
   };
 
   return (
@@ -75,6 +83,7 @@ export const CarList = ({
       <Pagination
         className={classes.pagination}
         count={totalPageCount}
+        page={page}
         showFirstButton
         showLastButton
         onChange={handlePaginationChange}

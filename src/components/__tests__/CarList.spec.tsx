@@ -1,50 +1,28 @@
 import React from 'react';
 import { render, RenderResult } from '@testing-library/react';
 import { CarList } from '../CarList';
-import { Car } from '../../constants/interfaces';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { cars } from '../../__mocks__/DATA';
 
 // TODO: RenderResult type stays as any, need to find to fix it.
 describe('CarList Component', () => {
-  const cars: Array<Car> = [
-    {
-      stockNumber: 29544,
-      manufacturerName: 'Mercedes-Benz',
-      modelName: 'Strich Acht',
-      color: 'white',
-      mileage: {
-        number: 100988,
-        unit: 'km',
-      },
-      fuelType: 'Diesel',
-      pictureUrl: 'https://auto1-js-task-api--mufasa71.repl.co/images/car.svg',
-    },
-    {
-      stockNumber: 39504,
-      manufacturerName: 'Mercedes-Benz',
-      modelName: 'CLS-Klasse',
-      color: 'silver',
-      mileage: {
-        number: 101029,
-        unit: 'km',
-      },
-      fuelType: 'Diesel',
-      pictureUrl: 'https://auto1-js-task-api--mufasa71.repl.co/images/car.svg',
-    },
-  ];
   let getCars: jest.Mock;
+  let setFilters: jest.Mock;
   let context: RenderResult;
 
   const renderWithProps = (props?: unknown) => {
     getCars = jest.fn(() => Promise.resolve()).mockName('getCars');
+    setFilters = jest.fn(() => Promise.resolve()).mockName('setFilters');
     context = render(
       <CarList
         getCars={getCars}
+        setFiltersAction={setFilters}
         cars={cars}
         loading={false}
         error={false}
-        totalCarsCount={cars.length}
-        totalPageCount={Math.ceil(cars.length / 10)}
+        totalCarsCount={1000}
+        totalPageCount={10}
+        filters={{ page: 1, sort: 'asc' }}
         {...props}
       />,
       { wrapper: Router },
@@ -85,7 +63,20 @@ describe('CarList Component', () => {
 
     test('should display correct header', () => {
       const { queryByText } = context;
-      expect(queryByText('Showing 2 of 2 results')).not.toBeNull();
+      expect(queryByText(`Showing 10 of 1000 results`)).not.toBeNull();
+    });
+  });
+
+  describe('when fetching fails', () => {
+    test('should display error message', () => {
+      renderWithProps({
+        error: true,
+        cars: [],
+        totalCarsCount: 0,
+        totalPageCount: 0,
+      });
+      const { queryByText } = context;
+      expect(queryByText('An error has occured.')).not.toBeNull();
     });
   });
 
