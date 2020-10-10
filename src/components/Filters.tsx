@@ -7,7 +7,6 @@ import {
   Select,
   Theme,
   InputLabel,
-  Typography,
 } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
@@ -73,7 +72,7 @@ export const Filters = ({
   useEffect(() => {
     loadColors();
     loadManufacturers();
-  }, []);
+  }, [loadColors, loadManufacturers]);
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
       <InputLabel id="color-filter-input-label">Color</InputLabel>
