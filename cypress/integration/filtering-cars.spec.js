@@ -911,43 +911,34 @@ describe('Filtering Cars', () => {
 
   it('should allow filtering restaurants by color', () => {
     cy.server({ force404: true });
-    cy.route({
-      method: 'GET',
-      url: 'https://auto1-mock-server.herokuapp.com/api/cars**',
-      response: {
-        cars,
-        totalPageCount: 100,
-        totalCarsCount: 1000,
-      },
+    cy.route('https://auto1-mock-server.herokuapp.com/api/cars**', {
+      cars,
+      totalPageCount: 100,
+      totalCarsCount: 1000,
     }).as('getCars');
 
-    cy.route({
-      method: 'GET',
-      url: 'https://auto1-mock-server.herokuapp.com/api/colors',
-      response: {
-        colors,
-      },
+    cy.route('https://auto1-mock-server.herokuapp.com/api/colors', {
+      colors,
     });
 
-    cy.route({
-      method: 'GET',
-      url: 'https://auto1-mock-server.herokuapp.com/api/manufacturers',
-      response: {
-        manufacturers,
-      },
+    cy.route('https://auto1-mock-server.herokuapp.com/api/manufacturers', {
+      manufacturers,
     });
 
     cy.visit('/');
+    cy.wait('@getCars');
+    cy.get('[data-testid="color-filter-input"]').click();
+    cy.get('[data-value="white"').click();
 
-    cy.get('[data-testid="color-filter-input"]').select('White');
+    cy.route('https://auto1-mock-server.herokuapp.com/api/cars**', {
+      cars: cars.filter(car => car.color === 'white'),
+      totalPageCount: 1,
+      totalCarsCount: 2,
+    }).as('getCarsFiltered');
+
     cy.get('[data-testid="cars-filter-button"]').click();
 
-    cy.wait('@getCars')
-      .its('url')
-      .should(
-        'equal',
-        'https://auto1-mock-server.herokuapp.com/api/cars?color=white&sort=asc&page=1',
-      );
+    cy.wait('@getCarsFiltered');
 
     cy.contains('Skoda Felicia');
     cy.contains('Tesla Model X').should('not.exist');

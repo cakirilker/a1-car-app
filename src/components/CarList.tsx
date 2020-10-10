@@ -49,7 +49,7 @@ export const CarList = ({
   const classes = useStyles();
   useEffect(() => {
     getCars();
-  }, [getCars]);
+  }, []);
 
   const handlePaginationChange = (
     event: React.ChangeEvent<unknown>,

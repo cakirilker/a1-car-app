@@ -1,23 +1,50 @@
 import React from 'react';
 import { render, RenderResult } from '@testing-library/react';
-import { Filters } from '..';
+import { Filters } from '../Filters';
+import fireEvent from '@testing-library/user-event';
 
 describe('Filters Component', () => {
   const colors = ['red', 'blue', 'green', 'black', 'yellow', 'white', 'silver'];
+  let loadColors: jest.Mock;
+  let loadManufacturers: jest.Mock;
+  let getCars: jest.Mock;
+  let context: RenderResult;
 
   describe('Color filter', () => {
-    test('should load colors on initial render', () => {
-      const loadColors = jest
+    const renderWithProps = (props?: unknown) => {
+      loadColors = jest
         .fn(() => Promise.resolve(colors))
         .mockName('loadColors');
-      render(<Filters colors={colors} loadColors={loadColors}></Filters>);
+      loadManufacturers = jest
+        .fn(() => Promise.resolve())
+        .mockName('loadManufacturers');
+      getCars = jest.fn(() => Promise.resolve()).mockName('getCars');
+      context = render(
+        <Filters
+          colors={colors}
+          manufacturers={[]}
+          loadColors={loadColors}
+          loadManufacturers={loadManufacturers}
+          getCars={getCars}
+          {...props}
+        />,
+      );
+    };
+    test('should load colors on initial render', () => {
+      renderWithProps();
       expect(loadColors).toHaveBeenCalledTimes(1);
     });
+
     test('should render given colors', () => {
-      render(<Filters colors={colors} loadColors={() => {}}></Filters>);
+      renderWithProps();
+      const { queryAllByRole, container } = context;
+      // const trigger = getByRole('button');
+      const trigger = container.querySelector('#color-filter-input-select');
+      // fireEvent.mouseDown(trigger);
+      fireEvent.click(trigger);
+      const options = queryAllByRole('option');
+      expect(options).toHaveLength(8);
     });
-    test('should render only No Color option with empty colors', () => {
-      render(<Filters colors={[]} loadColors={() => {}}></Filters>);
-    });
+    test.todo('should render only All car colors option with empty colors');
   });
 });
