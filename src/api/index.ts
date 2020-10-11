@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import {
   Auto1API,
+  Car,
   CarsRequest,
   CarsResponse,
   Manufacturer,
@@ -31,5 +32,10 @@ const api: Auto1API = {
         (response: AxiosResponse<{ manufacturers: Array<Manufacturer> }>) =>
           response.data.manufacturers,
       ),
+
+  getCar: (stockNumber: number) =>
+    client
+      .get(`/cars/${stockNumber}`)
+      .then((response: AxiosResponse<{ car: Car }>) => response.data.car),
 };
 export default api;

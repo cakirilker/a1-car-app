@@ -1,9 +1,15 @@
-import { GET_CARS, SET_ERROR, SET_LOADING } from '../../constants';
+import {
+  GET_CARS,
+  GET_CAR_DETAILS,
+  SET_ERROR,
+  SET_LOADING,
+} from '../../constants';
 import { Car } from '../../constants/interfaces';
 import { CarsActionTypes } from '../actions/types';
 
 export type CarsState = Readonly<{
   data: Array<Car>;
+  detail?: Car;
   totalPageCount: number;
   totalCarsCount: number;
   loading: Boolean;
@@ -33,6 +39,9 @@ export default (
         loading: false,
         error: false,
       };
+    }
+    case GET_CAR_DETAILS: {
+      return { ...state, detail: action.payload };
     }
     case SET_LOADING:
       return { ...state, loading: action.payload, error: false };

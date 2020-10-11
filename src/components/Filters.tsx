@@ -47,6 +47,11 @@ const useStyles = makeStyles((theme: Theme) =>
     option: {
       textTransform: 'capitalize',
     },
+    filterButton: {
+      padding: `6px ${theme.spacing(10)}px`,
+      alignSelf: 'flex-end',
+      textTransform: 'capitalize',
+    },
   }),
 );
 
@@ -139,6 +144,7 @@ export const Filters = ({
         color="primary"
         data-testid="cars-filter-button"
         fullWidth={false}
+        className={classes.filterButton}
       >
         Filter
       </Button>

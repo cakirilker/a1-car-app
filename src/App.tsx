@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import store from './store';
 import Home from './containers/Home';
+import CarDetail from './containers/CarDetail';
 
 const theme = createMuiTheme({
   palette: {
@@ -24,12 +25,15 @@ const App = () => {
         <CssBaseline />
         <Router basename={process.env.PUBLIC_URL}>
           <Header />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="*">
-              <Error404Page />
-            </Route>
-          </Switch>
+          <main id="content">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/details/:id" component={CarDetail} />
+              <Route path="*">
+                <Error404Page />
+              </Route>
+            </Switch>
+          </main>
           <Footer />
         </Router>
       </ThemeProvider>
