@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '../store/reducers/root.reducer';
-import { getCars } from '../store/actions/car.actions';
-import { setFiltersAction } from '../store/actions/filter.actions';
+import { setFilters } from '../store/reducers/filters.reducer';
+import { fetchCars } from '../store/reducers/cars.reducer';
 import CarListItem, { CarListItemSkeleton } from './CarListItem';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { Alert, Pagination } from '@material-ui/lab';
+import { CarsRequest } from '../constants/interfaces';
 
 const mapStateToProps = (state: RootState) => ({
   cars: state.cars.data,
@@ -17,8 +18,8 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = {
-  getCars,
-  setFiltersAction,
+  fetchCars,
+  setFilters: (payload: CarsRequest) => setFilters(payload),
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -42,8 +43,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const CarList = ({
-  getCars,
-  setFiltersAction,
+  fetchCars,
+  setFilters,
   cars,
   loading,
   error,
@@ -55,15 +56,15 @@ export const CarList = ({
   const { page } = filters;
 
   useEffect(() => {
-    getCars();
-  }, [getCars]);
+    fetchCars();
+  }, [fetchCars]);
 
   const handlePaginationChange = (
     event: React.ChangeEvent<unknown>,
     value: number,
   ) => {
-    setFiltersAction({ page: value });
-    getCars({ ...filters, page: value });
+    setFilters({ page: value });
+    fetchCars({ ...filters, page: value });
   };
 
   return (

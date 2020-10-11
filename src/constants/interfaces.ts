@@ -2,8 +2,9 @@ export type SortType = 'asc' | 'desc';
 export type MileageType = 'km' | 'mi';
 export type FuelType = 'Diesel' | 'Petrol';
 
-export interface Auto1API {
+export interface CarsAPI {
   getCars(options?: CarsRequest): Promise<CarsResponse>;
+  getCar(stockNumber: number): Promise<Car>;
   getColors(): Promise<string[]>;
   getManufacturers(): Promise<Manufacturer[]>;
 }

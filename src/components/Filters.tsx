@@ -11,9 +11,13 @@ import {
 import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '../store/reducers/root.reducer';
-import { loadColors, loadManufacturers } from '../store/actions/filter.actions';
-import { getCars } from '../store/actions/car.actions';
-import { setFiltersAction } from '../store/actions/filter.actions';
+import { fetchCars } from '../store/reducers/cars.reducer';
+import {
+  fetchColors,
+  fetchManufacturers,
+  setFilters,
+} from '../store/reducers/filters.reducer';
+import { CarsRequest } from '../constants/interfaces';
 
 const mapStateToProps = (state: RootState) => ({
   colors: state.filters.colors,
@@ -22,10 +26,10 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = {
-  loadColors,
-  loadManufacturers,
-  getCars,
-  setFiltersAction,
+  fetchManufacturers,
+  fetchCars,
+  setFilters: (payload: CarsRequest) => setFilters(payload),
+  fetchColors,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -47,6 +51,11 @@ const useStyles = makeStyles((theme: Theme) =>
     option: {
       textTransform: 'capitalize',
     },
+    filterButton: {
+      padding: `6px ${theme.spacing(10)}px`,
+      alignSelf: 'flex-end',
+      textTransform: 'capitalize',
+    },
   }),
 );
 
@@ -54,31 +63,31 @@ export const Filters = ({
   colors,
   manufacturers,
   filters,
-  loadColors,
-  loadManufacturers,
-  setFiltersAction,
-  getCars,
+  fetchManufacturers,
+  setFilters,
+  fetchCars,
+  fetchColors,
 }: Props) => {
   const classes = useStyles();
   // const [color, setColor] = React.useState<string>('');
   // const [manufacturer, setManufacturer] = React.useState<string>('');
   const { manufacturer, color, sort } = filters;
   const handleColorChange = (event: React.ChangeEvent<{ value: unknown }>) =>
-    setFiltersAction({ color: event.target.value as string });
+    setFilters({ color: event.target.value as string });
 
   const handleManufacturerChange = (
     event: React.ChangeEvent<{ value: unknown }>,
-  ) => setFiltersAction({ manufacturer: event.target.value as string });
+  ) => setFilters({ manufacturer: event.target.value as string });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setFiltersAction({ page: 1 });
-    getCars({ color, manufacturer, page: 1, sort });
+    setFilters({ page: 1 });
+    fetchCars({ color, manufacturer, page: 1, sort });
   };
   useEffect(() => {
-    loadColors();
-    loadManufacturers();
-  }, [loadColors, loadManufacturers]);
+    fetchColors();
+    fetchManufacturers();
+  }, [fetchColors, fetchManufacturers]);
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
       <InputLabel id="color-filter-input-label">Color</InputLabel>
@@ -139,6 +148,7 @@ export const Filters = ({
         color="primary"
         data-testid="cars-filter-button"
         fullWidth={false}
+        className={classes.filterButton}
       >
         Filter
       </Button>

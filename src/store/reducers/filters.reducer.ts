@@ -1,6 +1,29 @@
-import { GET_MANUFACTURERS, GET_COLORS, SET_FILTERS } from '../../constants';
-import { CarsRequest, Manufacturer } from '../../constants/interfaces';
-import { FilterActionTypes } from '../actions/types';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AppDispatch } from '..';
+import { GET_COLORS, GET_MANUFACTURERS } from '../../constants';
+import {
+  CarsAPI,
+  CarsRequest,
+  Manufacturer,
+} from '../../constants/interfaces';
+
+export const fetchColors = createAsyncThunk<
+  string[],
+  void,
+  { extra: { api: CarsAPI } }
+>(GET_COLORS, async (_, { extra: { api } }) => {
+  const response = await api.getColors();
+  return response;
+});
+
+export const fetchManufacturers = createAsyncThunk<
+  Manufacturer[],
+  void,
+  { dispatch: AppDispatch; extra: { api: CarsAPI } }
+>(GET_MANUFACTURERS, async (_, { extra: { api } }) => {
+  const response = await api.getManufacturers();
+  return response;
+});
 
 export type FiltersState = Readonly<{
   colors: string[];
@@ -17,18 +40,27 @@ const initialState: FiltersState = {
   },
 };
 
-export default (
-  state: FiltersState = initialState,
-  action: FilterActionTypes,
-): FiltersState => {
-  switch (action.type) {
-    case GET_COLORS:
-      return { ...state, colors: action.payload };
-    case GET_MANUFACTURERS:
-      return { ...state, manufacturers: action.payload };
-    case SET_FILTERS:
-      return { ...state, active: { ...state.active, ...action.payload } };
-    default:
-      return state;
-  }
-};
+export const filtersSlice = createSlice({
+  name: 'filters',
+  initialState,
+  reducers: {
+    setFilters(state, action: PayloadAction<CarsRequest>) {
+      state.active = { ...state.active, ...action.payload };
+    },
+  },
+  extraReducers: builder => {
+    builder.addCase(fetchColors.pending, state => {});
+    builder.addCase(fetchColors.fulfilled, (state, action) => {
+      state.colors = action.payload;
+    });
+    builder.addCase(fetchColors.rejected, state => {});
+
+    builder.addCase(fetchManufacturers.fulfilled, (state, action) => {
+      state.manufacturers = action.payload;
+    });
+  },
+});
+
+export const { setFilters } = filtersSlice.actions;
+
+export default filtersSlice.reducer;

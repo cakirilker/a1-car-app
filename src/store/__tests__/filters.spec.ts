@@ -1,20 +1,24 @@
-import { applyMiddleware, createStore, Store } from 'redux';
-import FiltersReducer, { FiltersState } from '../reducers/filters.reducer';
-import {
-  loadColors,
-  loadManufacturers,
-  setFiltersAction,
-} from '../actions/filter.actions';
-import { FilterActionTypes } from '../actions/types';
-import thunk from 'redux-thunk';
 import { manufacturers, colors } from '../../__mocks__/DATA';
+import FiltersReducer, {
+  fetchColors,
+  fetchManufacturers,
+  FiltersState,
+  setFilters,
+} from '../reducers/filters.reducer';
+import {
+  configureStore,
+  getDefaultMiddleware,
+  EnhancedStore,
+} from '@reduxjs/toolkit';
 
 describe('filters reducer', () => {
   describe('initial state', () => {
-    let store: Store<FiltersState, FilterActionTypes>;
+    let store: EnhancedStore<FiltersState>;
 
     beforeEach(() => {
-      store = createStore(FiltersReducer, applyMiddleware(thunk));
+      store = configureStore({
+        reducer: FiltersReducer,
+      });
     });
 
     test('should not have active color filter', () => {
@@ -29,34 +33,29 @@ describe('filters reducer', () => {
   });
 
   describe('actions', () => {
-    let store: Store<FiltersState, any>;
-    let api;
+    let store: EnhancedStore<FiltersState, any>;
 
     beforeEach(() => {
-      api = {
+      const api = {
         getColors: () => Promise.resolve(colors),
         getManufacturers: () => Promise.resolve(manufacturers),
       };
-      store = createStore(
-        FiltersReducer,
-        applyMiddleware(thunk.withExtraArgument(api)),
-      );
+      store = configureStore({
+        reducer: FiltersReducer,
+        middleware: getDefaultMiddleware({ thunk: { extraArgument: { api } } }),
+      });
     });
 
-    describe('loadColors Action', () => {
-      beforeEach(() => {
-        store.dispatch(loadColors());
-      });
-      test('should store colors', () => {
+    describe('fetchColors Action', () => {
+      test('should store colors', async () => {
+        await store.dispatch(fetchColors());
         expect(store.getState().colors).toEqual(colors);
       });
     });
 
-    describe('loadManufacturers Action', () => {
-      beforeEach(() => {
-        store.dispatch(loadManufacturers());
-      });
-      test('should store manufacturers', () => {
+    describe('fetchManufacturers Action', () => {
+      test('should store manufacturers', async () => {
+        await store.dispatch(fetchManufacturers());
         expect(store.getState().manufacturers).toEqual(manufacturers);
       });
     });
@@ -64,16 +63,14 @@ describe('filters reducer', () => {
     describe('setFilters Action', () => {
       test('should set given filters as active', () => {
         expect(store.getState().active).toEqual({ page: 1, sort: 'asc' });
-        store.dispatch(
-          setFiltersAction({ color: 'red', manufacturer: 'Audi' }),
-        );
+        store.dispatch(setFilters({ color: 'red', manufacturer: 'Audi' }));
         expect(store.getState().active).toEqual({
           page: 1,
           sort: 'asc',
           color: 'red',
           manufacturer: 'Audi',
         });
-        store.dispatch(setFiltersAction({ page: 2 }));
+        store.dispatch(setFilters({ page: 2 }));
         expect(store.getState().active).toEqual({
           page: 2,
           sort: 'asc',

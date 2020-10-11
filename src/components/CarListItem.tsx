@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { Car } from '../constants/interfaces';
 
 interface Props {
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
-    padding: '0 14px !important',
+    padding: '0 24px 0 !important',
   },
   image: {
     width: 100,
@@ -97,7 +97,7 @@ export const CarListItem = ({ item }: Props) => {
         <Link
           className={classes.link}
           color="inherit"
-          component={NavLink}
+          component={RouterLink}
           to={`/details/${stockNumber}`}
         >
           <Typography variant="subtitle2">View Details</Typography>
