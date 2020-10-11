@@ -6,17 +6,17 @@ import { cars } from '../../__mocks__/DATA';
 
 // TODO: RenderResult type stays as any, need to find to fix it.
 describe('CarList Component', () => {
-  let getCars: jest.Mock;
+  let fetchCars: jest.Mock;
   let setFilters: jest.Mock;
   let context: RenderResult;
 
   const renderWithProps = (props?: unknown) => {
-    getCars = jest.fn(() => Promise.resolve()).mockName('getCars');
+    fetchCars = jest.fn(() => Promise.resolve()).mockName('fetchCars');
     setFilters = jest.fn(() => Promise.resolve()).mockName('setFilters');
     context = render(
       <CarList
-        getCars={getCars}
-        setFiltersAction={setFilters}
+        fetchCars={fetchCars}
+        setFilters={setFilters}
         cars={cars}
         loading={false}
         error={false}
@@ -31,7 +31,7 @@ describe('CarList Component', () => {
 
   test('should load cars on initial render', () => {
     renderWithProps();
-    expect(getCars).toHaveBeenCalled();
+    expect(fetchCars).toHaveBeenCalled();
   });
 
   test('should display the skeletons while loading', () => {

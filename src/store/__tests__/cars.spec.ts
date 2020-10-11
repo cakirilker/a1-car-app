@@ -1,17 +1,18 @@
-import { createStore, applyMiddleware, Store } from 'redux';
-import thunk from 'redux-thunk';
-import CarsReducer, { CarsState } from '../reducers/cars.reducer';
-import { getCars } from '../actions/car.actions';
-import { CarsActionTypes } from '../actions/types';
+import CarsReducer, { CarsState, fetchCars } from '../reducers/cars.reducer';
 import { CarsResponse } from '../../constants/interfaces';
 import { cars } from '../../__mocks__/DATA';
+import {
+  configureStore,
+  getDefaultMiddleware,
+  EnhancedStore,
+} from '@reduxjs/toolkit';
 
 describe('cars reducer', () => {
   describe('initial state', () => {
-    let store: Store<CarsState, CarsActionTypes>;
+    let store: EnhancedStore<CarsState>;
 
     beforeEach(() => {
-      store = createStore(CarsReducer, applyMiddleware(thunk));
+      store = configureStore({ reducer: CarsReducer });
     });
 
     test('should not have loading flag true', () => {
@@ -31,18 +32,20 @@ describe('cars reducer', () => {
         totalPageCount: 1,
       };
       // TODO:
-      let store: Store<CarsState, any>;
+      let store: EnhancedStore<CarsState, any>;
 
-      beforeEach(() => {
+      beforeEach(async () => {
         const api = {
           getCars: () => Promise.resolve(carsResponse),
         };
 
-        store = createStore(
-          CarsReducer,
-          applyMiddleware(thunk.withExtraArgument(api)),
-        );
-        store.dispatch(getCars());
+        store = configureStore({
+          reducer: CarsReducer,
+          middleware: getDefaultMiddleware({
+            thunk: { extraArgument: { api } },
+          }),
+        });
+        await store.dispatch(fetchCars());
       });
 
       test('should store the cars', () => {
@@ -65,26 +68,31 @@ describe('cars reducer', () => {
     });
 
     describe('while fetching', () => {
-      let store: Store<CarsState, any>;
-      beforeEach(() => {
+      let store: EnhancedStore<CarsState, any>;
+      beforeEach(async () => {
         const api = {
           getCars: () => new Promise(() => {}),
         };
         const initialState: CarsState = {
           data: [],
+          detail: { loading: false, error: false },
           totalCarsCount: 0,
           totalPageCount: 0,
           loading: false,
           error: true,
         };
-        store = createStore(
-          CarsReducer,
-          initialState,
-          applyMiddleware(thunk.withExtraArgument(api)),
-        );
-        store.dispatch(getCars());
+
+        store = configureStore({
+          reducer: CarsReducer,
+          preloadedState: initialState,
+          middleware: getDefaultMiddleware({
+            thunk: { extraArgument: { api } },
+          }),
+        });
+
+        store.dispatch(fetchCars());
       });
-      test('should set loading flag true', () => {
+      test('should set loading flag true', async () => {
         expect(store.getState().loading).toEqual(true);
       });
       test('should set the error flag to false', () => {
@@ -93,16 +101,18 @@ describe('cars reducer', () => {
     });
 
     describe('when fetching fails', () => {
-      let store: Store<CarsState, any>;
-      beforeEach(() => {
+      let store: EnhancedStore<CarsState, any>;
+      beforeEach(async () => {
         const api = {
           getCars: () => Promise.reject(),
         };
-        store = createStore(
-          CarsReducer,
-          applyMiddleware(thunk.withExtraArgument(api)),
-        );
-        store.dispatch(getCars());
+        store = configureStore({
+          reducer: CarsReducer,
+          middleware: getDefaultMiddleware({
+            thunk: { extraArgument: { api } },
+          }),
+        });
+        await store.dispatch(fetchCars());
       });
       test('should set loading flag false', () => {
         expect(store.getState().loading).toEqual(false);

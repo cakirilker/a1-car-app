@@ -5,28 +5,30 @@ import fireEvent from '@testing-library/user-event';
 import { colors, manufacturers } from '../../__mocks__/DATA';
 
 describe('Filters Component', () => {
-  let loadColors: jest.Mock;
-  let loadManufacturers: jest.Mock;
-  let getCars: jest.Mock;
+  let fetchColors: jest.Mock;
+  let fetchManufacturers: jest.Mock;
+  let fetchCars: jest.Mock;
   let setFilters: jest.Mock;
   let context: RenderResult;
 
   const renderWithProps = (props?: unknown) => {
-    loadColors = jest.fn(() => Promise.resolve(colors)).mockName('loadColors');
-    loadManufacturers = jest
+    fetchColors = jest
+      .fn(() => Promise.resolve(colors))
+      .mockName('fetchColors');
+    fetchManufacturers = jest
       .fn(() => Promise.resolve())
-      .mockName('loadManufacturers');
-    getCars = jest.fn(() => Promise.resolve()).mockName('getCars');
+      .mockName('fetchManufacturers');
+    fetchCars = jest.fn(() => Promise.resolve()).mockName('fetchCars');
     setFilters = jest.fn(() => Promise.resolve()).mockName('setFilters');
     context = render(
       <Filters
         colors={colors}
         manufacturers={manufacturers}
-        loadColors={loadColors}
-        loadManufacturers={loadManufacturers}
-        getCars={getCars}
+        fetchColors={fetchColors}
+        fetchCars={fetchCars}
         filters={{ page: 1, sort: 'asc' }}
-        setFiltersAction={setFilters}
+        setFilters={setFilters}
+        fetchManufacturers={fetchManufacturers}
         {...props}
       />,
     );
@@ -34,12 +36,12 @@ describe('Filters Component', () => {
   describe('initial state', () => {
     test('should load colors on initial render', () => {
       renderWithProps();
-      expect(loadColors).toHaveBeenCalledTimes(1);
+      expect(fetchColors).toHaveBeenCalledTimes(1);
     });
 
     test('should load manufacturers on initial render', () => {
       renderWithProps();
-      expect(loadManufacturers).toHaveBeenCalledTimes(1);
+      expect(fetchManufacturers).toHaveBeenCalledTimes(1);
     });
 
     test('should display color filter with default option', () => {
@@ -111,15 +113,15 @@ describe('Filters Component', () => {
   });
 
   describe('When filters submit', () => {
-    test('should call getCars when Filter button pressed', () => {
+    test('should call fetchCars when Filter button pressed', () => {
       renderWithProps({
         filters: { manufacturer: 'Audi', color: 'red', sort: 'asc' },
       });
       const { getByTestId } = context;
       const button = getByTestId('cars-filter-button');
-      expect(getCars).not.toHaveBeenCalled();
+      expect(fetchCars).not.toHaveBeenCalled();
       fireEvent.click(button);
-      expect(getCars).toHaveBeenCalledWith({
+      expect(fetchCars).toHaveBeenCalledWith({
         color: 'red',
         manufacturer: 'Audi',
         page: 1,
