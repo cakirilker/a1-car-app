@@ -23,7 +23,7 @@ export interface Mileage {
 
 export interface Manufacturer {
   name: string;
-  models: Array<{ name: string }>;
+  models: { name: string }[];
 }
 
 export interface Car {
@@ -37,7 +37,7 @@ export interface Car {
 }
 
 export interface CarsResponse {
-  cars: Array<Car>;
+  cars: Car[];
   totalPageCount: number;
   totalCarsCount: number;
 }

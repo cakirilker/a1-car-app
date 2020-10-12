@@ -1,5 +1,5 @@
 import { ThunkAction } from 'redux-thunk';
-import { RootReducer, RootState } from './reducers/root.reducer';
+import { RootReducer, RootState } from './reducers';
 import api from '../api';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { Action } from 'redux';

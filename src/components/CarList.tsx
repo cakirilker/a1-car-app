@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { RootState } from '../store/reducers/root.reducer';
-import { setFilters } from '../store/reducers/filters.reducer';
-import { fetchCars } from '../store/reducers/cars.reducer';
 import CarListItem, { CarListItemSkeleton } from './CarListItem';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { Alert, Pagination } from '@material-ui/lab';
 import { CarsRequest } from '../constants/interfaces';
+import { RootState, setFilters, fetchCars } from '../store/reducers';
 
 const mapStateToProps = (state: RootState) => ({
   cars: state.cars.data,

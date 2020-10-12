@@ -21,15 +21,14 @@ const api: CarsAPI = {
     client
       .get('/colors')
       .then(
-        (response: AxiosResponse<{ colors: Array<string> }>) =>
-          response.data.colors,
+        (response: AxiosResponse<{ colors: string[] }>) => response.data.colors,
       ),
 
   getManufacturers: () =>
     client
       .get('/manufacturers')
       .then(
-        (response: AxiosResponse<{ manufacturers: Array<Manufacturer> }>) =>
+        (response: AxiosResponse<{ manufacturers: Manufacturer[] }>) =>
           response.data.manufacturers,
       ),
 

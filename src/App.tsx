@@ -5,9 +5,7 @@ import { Footer, Header } from './components';
 import { Provider } from 'react-redux';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import store from './store';
-import Home from './containers/Home';
-import CarDetail from './containers/CarDetail';
-import Error404 from './containers/Error404';
+import { Home, CarDetail, Error404 } from './containers';
 
 const theme = createMuiTheme({
   palette: {
