@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/a1-car-app/static/css/main.79898294.chunk.css",
-    "main.js": "/a1-car-app/static/js/main.7bb71b30.chunk.js",
-    "main.js.map": "/a1-car-app/static/js/main.7bb71b30.chunk.js.map",
+    "main.js": "/a1-car-app/static/js/main.098258c6.chunk.js",
+    "main.js.map": "/a1-car-app/static/js/main.098258c6.chunk.js.map",
     "runtime-main.js": "/a1-car-app/static/js/runtime-main.724f3bdc.js",
     "runtime-main.js.map": "/a1-car-app/static/js/runtime-main.724f3bdc.js.map",
-    "static/js/2.a290efd3.chunk.js": "/a1-car-app/static/js/2.a290efd3.chunk.js",
-    "static/js/2.a290efd3.chunk.js.map": "/a1-car-app/static/js/2.a290efd3.chunk.js.map",
+    "static/js/2.bbdd7f67.chunk.js": "/a1-car-app/static/js/2.bbdd7f67.chunk.js",
+    "static/js/2.bbdd7f67.chunk.js.map": "/a1-car-app/static/js/2.bbdd7f67.chunk.js.map",
     "index.html": "/a1-car-app/index.html",
-    "precache-manifest.6d566e5376659105854f725e0c03a049.js": "/a1-car-app/precache-manifest.6d566e5376659105854f725e0c03a049.js",
+    "precache-manifest.2af75cb227aef75569428d131eb3a0e7.js": "/a1-car-app/precache-manifest.2af75cb227aef75569428d131eb3a0e7.js",
     "service-worker.js": "/a1-car-app/service-worker.js",
     "static/css/main.79898294.chunk.css.map": "/a1-car-app/static/css/main.79898294.chunk.css.map",
-    "static/js/2.a290efd3.chunk.js.LICENSE.txt": "/a1-car-app/static/js/2.a290efd3.chunk.js.LICENSE.txt"
+    "static/js/2.bbdd7f67.chunk.js.LICENSE.txt": "/a1-car-app/static/js/2.bbdd7f67.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.724f3bdc.js",
-    "static/js/2.a290efd3.chunk.js",
+    "static/js/2.bbdd7f67.chunk.js",
     "static/css/main.79898294.chunk.css",
-    "static/js/main.7bb71b30.chunk.js"
+    "static/js/main.098258c6.chunk.js"
   ]
 }
