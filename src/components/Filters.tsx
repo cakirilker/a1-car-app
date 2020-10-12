@@ -42,19 +42,17 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: 'flex',
       flexDirection: 'column',
-      margin: 20,
+      margin: theme.spacing(3),
     },
     formControl: {
-      margin: `${theme.spacing(1)}px 0 ${theme.spacing(3)}px`,
+      margin: theme.spacing(1, 0, 3),
       minWidth: 120,
     },
     option: {
       textTransform: 'capitalize',
     },
     filterButton: {
-      padding: `6px ${theme.spacing(10)}px`,
       alignSelf: 'flex-end',
-      textTransform: 'capitalize',
     },
   }),
 );
@@ -69,8 +67,6 @@ export const Filters = ({
   fetchColors,
 }: Props) => {
   const classes = useStyles();
-  // const [color, setColor] = React.useState<string>('');
-  // const [manufacturer, setManufacturer] = React.useState<string>('');
   const { manufacturer, color, sort } = filters;
   const handleColorChange = (event: React.ChangeEvent<{ value: unknown }>) =>
     setFilters({ color: event.target.value as string });
