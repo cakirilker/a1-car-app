@@ -1,7 +1,11 @@
+/// <reference types="Cypress" />
+
+import { Car } from '../../src/constants/interfaces';
+
 describe('Viewing Car Detail', () => {
   it('should able to view car details on detail page', () => {
     const stockNumber = 41400;
-    const car = {
+    const car: Car = {
       stockNumber,
       manufacturerName: 'Fiat',
       modelName: 'Marea',
@@ -19,7 +23,7 @@ describe('Viewing Car Detail', () => {
       car,
     }).as('getCarByStockNumber');
 
-    cy.visit(`#/details/${stockNumber}`);
+    cy.visit(`/details/${stockNumber}`);
     cy.wait('@getCarByStockNumber');
     cy.contains(`${car.manufacturerName} ${car.modelName}`);
     cy.contains(
@@ -30,9 +34,10 @@ describe('Viewing Car Detail', () => {
       } - ${car.color}`,
     );
   });
+
   it('should able to save car as favorite', () => {
     const stockNumber = 41400;
-    const car = {
+    const car: Car = {
       stockNumber,
       manufacturerName: 'Fiat',
       modelName: 'Marea',
@@ -52,7 +57,7 @@ describe('Viewing Car Detail', () => {
       car,
     }).as('getCarByStockNumber');
 
-    cy.visit(`#/details/${stockNumber}`);
+    cy.visit(`/details/${stockNumber}`);
     cy.wait('@getCarByStockNumber');
 
     cy.get('button[data-testid="favorite-car-button"]')
@@ -62,9 +67,10 @@ describe('Viewing Car Detail', () => {
         expect(localStorage.getItem('favorites')).to.eq(`[${stockNumber}]`);
       });
   });
+
   it('should able to remove car from favorites', () => {
     const stockNumber = 41400;
-    const car = {
+    const car: Car = {
       stockNumber,
       manufacturerName: 'Fiat',
       modelName: 'Marea',
@@ -86,7 +92,7 @@ describe('Viewing Car Detail', () => {
       car,
     }).as('getCarByStockNumber');
 
-    cy.visit(`#/details/${stockNumber}`);
+    cy.visit(`/details/${stockNumber}`);
     cy.wait('@getCarByStockNumber');
 
     cy.get('button[data-testid="favorite-car-button"]')
