@@ -36,7 +36,6 @@ export type CarsState = Readonly<{
     loading: boolean;
     error: boolean;
   };
-  favorites: number[];
 }>;
 
 const initialState: CarsState = {
@@ -49,7 +48,6 @@ const initialState: CarsState = {
     loading: false,
     error: false,
   },
-  favorites: [],
 };
 
 export const carsSlice = createSlice({

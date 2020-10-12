@@ -1,5 +1,9 @@
-import CarsReducer, { CarsState, fetchCars } from '../reducers/cars.reducer';
-import { CarsResponse } from '../../constants/interfaces';
+import CarsReducer, {
+  CarsState,
+  fetchCarDetail,
+  fetchCars,
+} from '../reducers/cars.reducer';
+import { Car, CarsResponse } from '../../constants/interfaces';
 import { cars } from '../../__mocks__/DATA';
 import {
   configureStore,
@@ -22,9 +26,17 @@ describe('cars reducer', () => {
     test('should not have error flag true', () => {
       expect(store.getState().error).toEqual(false);
     });
+
+    test('should not have detail loading flag true', () => {
+      expect(store.getState().detail.loading).toEqual(false);
+    });
+
+    test('should not have detail error flag true', () => {
+      expect(store.getState().detail.error).toEqual(false);
+    });
   });
 
-  describe('getCars Action', () => {
+  describe('fetchCars Action', () => {
     describe('when fetching succeeds', () => {
       const carsResponse: CarsResponse = {
         cars,
@@ -119,6 +131,102 @@ describe('cars reducer', () => {
       });
       test('should set the error flag to true', () => {
         expect(store.getState().error).toEqual(true);
+      });
+    });
+  });
+
+  describe('fetchCarDetail Action', () => {
+    describe('when fetching succeeds', () => {
+      const car: Car = {
+        stockNumber: 29544,
+        manufacturerName: 'Mercedes-Benz',
+        modelName: 'Strich Acht',
+        color: 'white',
+        mileage: {
+          number: 100988,
+          unit: 'km',
+        },
+        fuelType: 'Diesel',
+        pictureUrl:
+          'https://auto1-js-task-api--mufasa71.repl.co/images/car.svg',
+      };
+      // TODO:
+      let store: EnhancedStore<CarsState, any>;
+
+      beforeEach(async () => {
+        const api = {
+          getCar: () => Promise.resolve(car),
+        };
+
+        store = configureStore({
+          reducer: CarsReducer,
+          middleware: getDefaultMiddleware({
+            thunk: { extraArgument: { api } },
+          }),
+        });
+        await store.dispatch(fetchCarDetail(car.stockNumber));
+      });
+
+      test('should store car detail', () => {
+        expect(store.getState().detail.data).toEqual(car);
+      });
+
+      test('should clear loading and error flag', () => {
+        expect(store.getState().detail.error).toEqual(false);
+        expect(store.getState().detail.loading).toEqual(false);
+      });
+    });
+    describe('while fetching', () => {
+      let store: EnhancedStore<CarsState, any>;
+      beforeEach(async () => {
+        const api = {
+          getCar: () => new Promise(() => {}),
+        };
+        const initialState: CarsState = {
+          data: [],
+          detail: { loading: false, error: false },
+          totalCarsCount: 0,
+          totalPageCount: 0,
+          loading: false,
+          error: true,
+        };
+
+        store = configureStore({
+          reducer: CarsReducer,
+          preloadedState: initialState,
+          middleware: getDefaultMiddleware({
+            thunk: { extraArgument: { api } },
+          }),
+        });
+
+        store.dispatch(fetchCarDetail(1));
+      });
+      test('should set loading flag as true', () => {
+        expect(store.getState().detail.loading).toBe(true);
+      });
+      test('should set error flag as false', () => {
+        expect(store.getState().detail.error).toBe(false);
+      });
+    });
+    describe('when fetching fails', () => {
+      let store: EnhancedStore<CarsState, any>;
+      beforeEach(async () => {
+        const api = {
+          getCar: () => Promise.reject(),
+        };
+        store = configureStore({
+          reducer: CarsReducer,
+          middleware: getDefaultMiddleware({
+            thunk: { extraArgument: { api } },
+          }),
+        });
+        await store.dispatch(fetchCarDetail(1));
+      });
+      test('should set loading flag as false', () => {
+        expect(store.getState().detail.loading).toBe(false);
+      });
+      test('should set error flag as true', () => {
+        expect(store.getState().detail.error).toBe(true);
       });
     });
   });

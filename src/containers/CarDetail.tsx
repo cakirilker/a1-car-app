@@ -20,7 +20,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = {
   fetchCarDetail,
-  clearCarDetail,
+  clearCarDetail: () => clearCarDetail(),
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -56,7 +56,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CarDetail = ({
+export const CarDetail = ({
   match: {
     params: { id },
   },
@@ -70,9 +70,7 @@ const CarDetail = ({
     () => JSON.parse(localStorage.getItem('favorites') || '[]') as number[],
   );
   useEffect(() => {
-    if (!isNaN(+id)) {
-      fetchCarDetail(+id);
-    }
+    fetchCarDetail(+id);
     return () => {
       clearCarDetail();
     };
@@ -91,12 +89,19 @@ const CarDetail = ({
   };
   return (
     <div>
-      <CardMedia className={classes.coverImage} image={data?.pictureUrl} />
+      <div className={classes.coverImage}>
+        {data && (
+          <CardMedia
+            className={classes.coverImage}
+            image={data?.pictureUrl}
+            data-testid="car-detail-image"
+          />
+        )}
+      </div>
       <Container className={classes.root} maxWidth="md">
+        {loading && <span>Loading...</span>}
         {error && <Alert severity="error">An error has occured.</Alert>}
-        {loading ? (
-          <span>Loading...</span>
-        ) : (
+        {!error && data && (
           <Grid container spacing={4}>
             <Grid item xs={12} sm={12} md={8}>
               <Typography className={classes.title} variant="h4" component="h1">
