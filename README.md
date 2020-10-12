@@ -28,6 +28,7 @@ yarn start
 - Pagination
 - Filter cars by color and/or manufacturer
 - View details of a car
+- Adding/Removing a car to favorites
 
 ## Thoughts on Tests
 This project uses [Jest](https://jestjs.io/), [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) for unit/integration test, and [Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress.html) for E2E tests.
