@@ -81,8 +81,8 @@ export const Filters = ({
     fetchCars({ color, manufacturer, page: 1, sort });
   };
   useEffect(() => {
-    fetchColors();
-    fetchManufacturers();
+    !colors.length && fetchColors();
+    !manufacturers.length && fetchManufacturers();
   }, [fetchColors, fetchManufacturers]);
   return (
     <form className={classes.root} onSubmit={handleSubmit}>

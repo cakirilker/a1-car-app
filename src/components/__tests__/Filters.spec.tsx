@@ -35,12 +35,12 @@ describe('Filters Component', () => {
   };
   describe('initial state', () => {
     test('should load colors on initial render', () => {
-      renderWithProps();
+      renderWithProps({ colors: [] });
       expect(fetchColors).toHaveBeenCalledTimes(1);
     });
 
     test('should load manufacturers on initial render', () => {
-      renderWithProps();
+      renderWithProps({ manufacturers: [] });
       expect(fetchManufacturers).toHaveBeenCalledTimes(1);
     });
 
