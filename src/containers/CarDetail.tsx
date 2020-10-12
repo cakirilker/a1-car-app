@@ -10,9 +10,8 @@ import {
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
-import { RootState } from '../store/reducers/root.reducer';
-import { fetchCarDetail, clearCarDetail } from '../store/reducers/cars.reducer';
 import { Alert } from '@material-ui/lab';
+import { RootState, fetchCarDetail, clearCarDetail } from '../store/reducers';
 
 const mapStateToProps = (state: RootState) => ({
   detail: state.cars.detail,

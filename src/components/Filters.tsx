@@ -10,14 +10,14 @@ import {
 } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { RootState } from '../store/reducers/root.reducer';
-import { fetchCars } from '../store/reducers/cars.reducer';
+import { CarsRequest } from '../constants/interfaces';
 import {
+  RootState,
+  fetchCars,
   fetchColors,
   fetchManufacturers,
   setFilters,
-} from '../store/reducers/filters.reducer';
-import { CarsRequest } from '../constants/interfaces';
+} from '../store/reducers';
 
 const mapStateToProps = (state: RootState) => ({
   colors: state.filters.colors,

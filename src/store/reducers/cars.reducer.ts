@@ -26,7 +26,7 @@ export const fetchCarDetail = createAsyncThunk<
 });
 
 export type CarsState = Readonly<{
-  data: Array<Car>;
+  data: Car[];
   totalPageCount: number;
   totalCarsCount: number;
   loading: Boolean;
@@ -50,7 +50,7 @@ const initialState: CarsState = {
   },
 };
 
-export const carsSlice = createSlice({
+const carsSlice = createSlice({
   name: 'cars',
   initialState,
   reducers: {

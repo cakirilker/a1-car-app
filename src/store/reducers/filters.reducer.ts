@@ -1,11 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppDispatch } from '..';
 import { GET_COLORS, GET_MANUFACTURERS } from '../../constants';
-import {
-  CarsAPI,
-  CarsRequest,
-  Manufacturer,
-} from '../../constants/interfaces';
+import { CarsAPI, CarsRequest, Manufacturer } from '../../constants/interfaces';
 
 export const fetchColors = createAsyncThunk<
   string[],
@@ -40,7 +36,7 @@ const initialState: FiltersState = {
   },
 };
 
-export const filtersSlice = createSlice({
+const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {

@@ -4,7 +4,6 @@ import { CarList } from '../CarList';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { cars } from '../../__mocks__/DATA';
 
-// TODO: RenderResult type stays as any, need to find to fix it.
 describe('CarList Component', () => {
   let fetchCars: jest.Mock;
   let setFilters: jest.Mock;
