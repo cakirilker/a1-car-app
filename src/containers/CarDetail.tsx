@@ -2,11 +2,9 @@ import {
   Button,
   CardMedia,
   Container,
-  createStyles,
   Grid,
   makeStyles,
   Paper,
-  Theme,
   Typography,
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
@@ -31,35 +29,32 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type PropsFromRouter = RouteComponentProps<{ id: string }>;
 type Props = PropsFromRouter & PropsFromRedux & {};
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      padding: '24px',
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
-    coverImage: {
-      height: 350,
-      backgroundColor: '#EDEDED',
-      backgroundPosition: 'center center',
-      backgroundSize: 'contain',
-    },
-    title: {
-      fontWeight: 'bold',
-    },
-    favoriteContainer: {
-      display: 'flex',
-      flexDirection: 'column',
-      padding: 24,
-      height: 'min-content',
-    },
-    favoriteButton: {
-      alignSelf: 'flex-end',
-      padding: `6px ${theme.spacing(5)}px`,
-    },
-  }),
-);
+const useStyles = makeStyles({
+  root: {
+    padding: 24,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  coverImage: {
+    height: 350,
+    backgroundColor: '#EDEDED',
+    backgroundPosition: 'center center',
+    backgroundSize: 'contain',
+  },
+  title: {
+    fontWeight: 'bold',
+  },
+  favoriteContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 24,
+    height: 'min-content',
+  },
+  favoriteButton: {
+    alignSelf: 'flex-end',
+  },
+});
 
 const CarDetail = ({
   match: {

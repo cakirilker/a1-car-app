@@ -1,33 +1,24 @@
-import {
-  Typography,
-  Link,
-  Container,
-  makeStyles,
-  createStyles,
-  Theme,
-} from '@material-ui/core';
+import { Typography, Link, Container, makeStyles } from '@material-ui/core';
 import React from 'react';
 import Auto1Logo from '../images/logo.png';
 import { Link as RouterLink } from 'react-router-dom';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      padding: '24px',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    image: {
-      width: 'min-content',
-      marginBottom: '24px',
-    },
-    header: {
-      fontWeight: 'bold',
-    },
-  }),
-);
+const useStyles = makeStyles({
+  root: {
+    padding: 24,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: 'min-content',
+    marginBottom: 24,
+  },
+  header: {
+    fontWeight: 'bold',
+  },
+});
 
 const Error404 = () => {
   const classes = useStyles();

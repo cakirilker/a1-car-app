@@ -2,7 +2,6 @@ import React from 'react';
 import {
   AppBar,
   Toolbar,
-  Typography,
   Theme,
   Link,
   makeStyles,
@@ -15,23 +14,10 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appBar: {
       borderBottom: `1px solid ${theme.palette.divider}`,
-      backgroundColor: '#fff',
-    },
-    toolbar: {
-      flexWrap: 'wrap',
-    },
-    toolbarTitle: {
-      flexGrow: 1,
     },
     link: {
       margin: theme.spacing(1, 1.5),
-      textTransform: 'none',
-      '&:hover': {
-        color: '#EA7F28',
-      },
-      '&.active': {
-        color: '#EA7F28',
-      },
+      color: theme.palette.text.primary,
     },
     brandImage: {
       margin: '10px 0',
@@ -45,26 +31,18 @@ const Header = () => {
   return (
     <AppBar
       position="static"
-      color="default"
+      color="inherit"
       elevation={0}
       className={classes.appBar}
     >
-      <Toolbar className={classes.toolbar}>
-        <Typography
-          variant="h6"
-          color="inherit"
-          noWrap
-          className={classes.toolbarTitle}
-        >
-          <NavLink to="/">
-            <img
-              src={Auto1Logo}
-              alt="Auto1 Logo"
-              className={classes.brandImage}
-            />
-          </NavLink>
-        </Typography>
-
+      <Toolbar>
+        <NavLink to="/" style={{ flexGrow: 1 }}>
+          <img
+            src={Auto1Logo}
+            alt="Auto1 Logo"
+            className={classes.brandImage}
+          />
+        </NavLink>
         <nav>
           <Link
             variant="button"

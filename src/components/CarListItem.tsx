@@ -36,9 +36,6 @@ const useStyles = makeStyles({
   heading: {
     fontWeight: 'bold',
   },
-  link: {
-    color: '#EA7F28',
-  },
 });
 
 export const CarListItemSkeleton = () => {
@@ -95,8 +92,7 @@ export const CarListItem = ({ item }: Props) => {
           - {fuelType} - {color}
         </Typography>
         <Link
-          className={classes.link}
-          color="inherit"
+          color="primary"
           component={RouterLink}
           to={`/details/${stockNumber}`}
         >
