@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/a1-car-app/precache-manifest.2af75cb227aef75569428d131eb3a0e7.js"
+  "/a1-car-app/precache-manifest.e21b91afcd8ead172ba514e1c97e5bab.js"
 );
 
 self.addEventListener('message', (event) => {
