@@ -43,7 +43,6 @@ describe('cars reducer', () => {
         totalCarsCount: 2,
         totalPageCount: 1,
       };
-      // TODO:
       let store: EnhancedStore<CarsState, any>;
 
       beforeEach(async () => {
@@ -150,7 +149,6 @@ describe('cars reducer', () => {
         pictureUrl:
           'https://auto1-js-task-api--mufasa71.repl.co/images/car.svg',
       };
-      // TODO:
       let store: EnhancedStore<CarsState, any>;
 
       beforeEach(async () => {
