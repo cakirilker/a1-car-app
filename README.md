@@ -1,48 +1,61 @@
 ![Tests](https://github.com/cakirilker/a1-car-app/workflows/Tests/badge.svg)
-
 ![Build and Deploy](https://github.com/cakirilker/a1-car-app/workflows/Build%20and%20Deploy/badge.svg)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Car Market App
+> This is an example project for a car market app. You can view list of cars, filter them and view detail of specific car.
+
+This project was bootstrapped with TypeScript version of the [Create React App](https://github.com/facebook/create-react-app).
+
+#### [View Demo](https://cakirilker.github.io/a1-car-app/)
+
+## Installation
+First, install the packages. 
+```
+yarn install
+```
+Then run following command to start the project. 
+```
+yarn start
+```
 
 ## Available Scripts
+- `yarn test` to run tests.
+- `yarn cypress:open` to open cypress window and run E2E tests from that window.
+- `yarn cypress:run` to run E2E test with a headless browser. It will print out the tests results to console. 
 
-In the project directory, you can run:
+## Features
+- Listing Cars
+- Pagination
+- Filter cars by color and/or manufacturer
+- View details of a car
 
-### `yarn start`
+## Thoughts on Tests
+This project uses [Jest](https://jestjs.io/), [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) for unit/integration test, and [Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress.html) for E2E tests.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+I tried to keep tests isolated as much as possible and tried to test each feature with E2E tests instead of complex integration tests. By following this philosophy I have ended up with following structure:
+- Testing UI components without connecting them to store.
+    - I have easily tested components without trying to mock a store or connecting it to a store. Simply passing down mock props made everything much clearer and easier. (ex. [`src/components/__tests__`](https://github.com/cakirilker/a1-car-app/tree/master/src/components/__tests__) or [`src/containers/__tests__`](https://github.com/cakirilker/a1-car-app/tree/master/src/containers/__tests__))
+- Testing store/reducers without connecting them to components.
+    - Without rendering any component and coupling tests of a store/reducer to other pieces of the application, I tested actions and reducers separately. These tests might seem testing the implementation detail but since the redux state is a crucial part of the application I think it's worth it. (ex. [`src/store/__tests__`](https://github.com/cakirilker/a1-car-app/tree/master/src/store/__tests__))
+- Testing features with E2E tests
+    - Since I have already verified that application pieces are working as expected when isolated, I also verified that they work together as expected with E2E tests. By doing that I didn't have to create complex or fragile integration tests.
+What did this allow me is that developing each piece without tightly coupling to each other.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## CI/CD
+This project contains two Github Actions for CI/CD purposes.
+- `main.yml` Starts running whenever a pull request is open or updated. It checks unit/integration tests and E2E test. 
+- `deploy.yml` controls deployment of app whenever a push happens on master branch(ex. pull request merge). It builds the project then deploys it to the GitHub Pages.
 
-### `yarn test`
+## Static Type Checking
+I have configured neccessary @types and files so TypeScript is available in testing, production code and E2E tests. Yay! Also thanks to TypeScripts [`Type Inference`](https://www.typescriptlang.org/docs/handbook/type-inference.html) I didn't have to type every interface or type.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Third Party Libraries
+- [TypeScript](https://www.typescriptlang.org/) for static type checking.
+- [Material UI](http://material-ui.com/) for UI components.
+- [Redux](https://redux.js.org/) for state management.
+- [Redux Thunk](https://github.com/reduxjs/redux-thunk) to write action creators.
+- [Redux Toolkit](https://redux-toolkit.js.org/) for reducing boilerplate code of traditional redux.
+- [React Router Dom](https://reactrouter.com/web/guides/quick-start) for routing.
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) for unit/integration testing.
+- [Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress.html) for E2E testing.
+- [Axios](https://github.com/axios/axios) for api calls.
