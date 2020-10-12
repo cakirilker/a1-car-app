@@ -1,3 +1,5 @@
+/// <reference types="Cypress" />
+
 import { cars } from '../../src/__mocks__/DATA';
 
 describe('Listing Cars', () => {
