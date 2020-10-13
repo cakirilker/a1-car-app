@@ -29,7 +29,7 @@ describe('CarList Component', () => {
   };
 
   test('should load cars on initial render', () => {
-    renderWithProps();
+    renderWithProps({ cars: [] });
     expect(fetchCars).toHaveBeenCalled();
   });
 

@@ -75,8 +75,8 @@ describe('CarDetail component', () => {
   describe('while loading', () => {
     test('should display loading indicator when loading is true', () => {
       renderWithProps({ detail: { loading: true, error: false } });
-      const { getByText } = context;
-      expect(getByText('Loading...')).not.toBeNull();
+      const { getByTestId } = context;
+      expect(getByTestId('loading-indicator')).not.toBeNull();
     });
   });
 

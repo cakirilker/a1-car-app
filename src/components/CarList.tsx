@@ -54,8 +54,7 @@ export const CarList = ({
   const { page } = filters;
 
   useEffect(() => {
-    setFilters({ page: 1 });
-    fetchCars({ ...filters, page: 1 });
+    !cars.length && fetchCars({ ...filters, page: 1 });
   }, [fetchCars]);
 
   const handlePaginationChange = (

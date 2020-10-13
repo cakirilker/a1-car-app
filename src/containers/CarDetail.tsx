@@ -102,7 +102,12 @@ export const CarDetail = ({
         )}
       </div>
       <Container className={classes.root} maxWidth="md">
-        {loading && <CircularProgress className={classes.loading} />}
+        {loading && (
+          <CircularProgress
+            data-testid="loading-indicator"
+            className={classes.loading}
+          />
+        )}
         {error && <Alert severity="error">An error has occured.</Alert>}
         {!error && data && (
           <Grid container spacing={4}>
