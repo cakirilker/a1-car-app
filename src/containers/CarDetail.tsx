@@ -1,6 +1,7 @@
 import {
   Button,
   CardMedia,
+  CircularProgress,
   Container,
   Grid,
   makeStyles,
@@ -53,6 +54,9 @@ const useStyles = makeStyles({
   favoriteButton: {
     alignSelf: 'flex-end',
   },
+  loading: {
+    margin: 'auto',
+  },
 });
 
 export const CarDetail = ({
@@ -98,7 +102,7 @@ export const CarDetail = ({
         )}
       </div>
       <Container className={classes.root} maxWidth="md">
-        {loading && <span>Loading...</span>}
+        {loading && <CircularProgress className={classes.loading} />}
         {error && <Alert severity="error">An error has occured.</Alert>}
         {!error && data && (
           <Grid container spacing={4}>

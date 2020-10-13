@@ -1,11 +1,14 @@
-import React from 'react';
-import { CssBaseline, createMuiTheme } from '@material-ui/core';
+import React, { Suspense, lazy } from 'react';
+import { CssBaseline, createMuiTheme, LinearProgress } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
 import { Footer, Header } from './components';
 import { Provider } from 'react-redux';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import store from './store';
-import { Home, CarDetail, Error404 } from './containers';
+
+const Home = lazy(() => import('./containers/Home'));
+const CarDetail = lazy(() => import('./containers/CarDetail'));
+const Error404 = lazy(() => import('./containers/Error404'));
 
 const theme = createMuiTheme({
   palette: {
@@ -69,13 +72,15 @@ const App = () => {
         <Router>
           <Header />
           <main id="content">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/details/:id" component={CarDetail} />
-              <Route path="*">
-                <Error404 />
-              </Route>
-            </Switch>
+            <Suspense fallback={<LinearProgress />}>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/details/:id" component={CarDetail} />
+                <Route path="*">
+                  <Error404 />
+                </Route>
+              </Switch>
+            </Suspense>
           </main>
           <Footer />
         </Router>
