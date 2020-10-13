@@ -1,0 +1,1 @@
+{"version":3,"sources":["Home.scss"],"names":[],"mappings":"AACE,iBACE,eAAiB","file":"3.f31d8175.chunk.css","sourcesContent":[".car-list {\n  &-header {\n    font-weight: bold;\n  }\n}\n"]}
