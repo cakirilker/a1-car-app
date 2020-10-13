@@ -71,7 +71,9 @@ describe('Filters Component', () => {
       renderWithProps();
       const { queryAllByRole, container } = context;
       // const trigger = getByRole('button');
-      const trigger = container.querySelector('#color-filter-input-select');
+      const trigger = container.querySelector(
+        '#color-filter-input-select',
+      ) as Element;
       // const trigger = container.querySelector('#color-filter-input-select');
       // fireEvent.mouseDown(trigger);
       fireEvent.click(trigger);
@@ -82,7 +84,9 @@ describe('Filters Component', () => {
     test('should call setFilters whenever color filter changed', () => {
       renderWithProps();
       const { getAllByRole, container } = context;
-      const trigger = container.querySelector('#color-filter-input-select');
+      const trigger = container.querySelector(
+        '#color-filter-input-select',
+      ) as Element;
       fireEvent.click(trigger);
       fireEvent.click(getAllByRole('option')[1]);
       expect(setFilters).toHaveBeenCalled();
@@ -95,7 +99,7 @@ describe('Filters Component', () => {
       const { queryAllByRole, container } = context;
       const trigger = container.querySelector(
         '#manufacturer-filter-input-select',
-      );
+      ) as Element;
       fireEvent.click(trigger);
       const options = queryAllByRole('option');
       expect(options).toHaveLength(manufacturers.length + 1);
@@ -105,7 +109,7 @@ describe('Filters Component', () => {
       const { getAllByRole, container } = context;
       const trigger = container.querySelector(
         '#manufacturer-filter-input-select',
-      );
+      ) as Element;
       fireEvent.click(trigger);
       fireEvent.click(getAllByRole('option')[1]);
       expect(setFilters).toHaveBeenCalled();

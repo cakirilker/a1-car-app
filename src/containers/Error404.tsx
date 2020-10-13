@@ -28,12 +28,17 @@ const Error404 = () => {
       <Typography variant="h3" className={classes.header} gutterBottom>
         404 - Not Found
       </Typography>
-      <Typography variant="subtitle1" gutterBottom>
+      <Typography variant="subtitle1" component="h5" gutterBottom>
         Sorry, the page you are looking for does not exists.
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
         You can always go back to the{' '}
-        <Link color="inherit" component={RouterLink} to="/">
+        <Link
+          color="inherit"
+          component={RouterLink}
+          to="/"
+          data-testid="homepage-link"
+        >
           homepage
         </Link>
         .
