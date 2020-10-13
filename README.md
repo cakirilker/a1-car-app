@@ -1,8 +1,8 @@
 ![Tests](https://github.com/cakirilker/a1-car-app/workflows/Tests/badge.svg)
 ![Build and Deploy](https://github.com/cakirilker/a1-car-app/workflows/Build%20and%20Deploy/badge.svg)
 
-# Car Market App
-> This is an example project for a car market app. You can view list of cars, filter them and view detail of specific car.
+# Car Dealership App
+> This is an example project for a car dealership app. You can view list of cars, filter them and view detail of specific car.
 
 This project was bootstrapped with TypeScript version of the [Create React App](https://github.com/facebook/create-react-app).
 
@@ -24,11 +24,11 @@ yarn start
 - `yarn cypress:run` to run E2E test with a headless browser. It will print out the tests results to console. 
 
 ## Features
-- Listing Cars
+- Listing cars
 - Pagination
-- Filter cars by color and/or manufacturer
+- Filter cars by a color and/or a manufacturer
 - View details of a car
-- Adding/Removing a car to favorites
+- Add/Remove a car to favorites
 
 ## Thoughts on Tests
 This project uses [Jest](https://jestjs.io/), [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) for unit/integration test, and [Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress.html) for E2E tests.
