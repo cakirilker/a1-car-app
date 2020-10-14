@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/a1-car-app/static/css/main.38a58737.chunk.css",
-    "main.js": "/a1-car-app/static/js/main.f2e50d29.chunk.js",
-    "main.js.map": "/a1-car-app/static/js/main.f2e50d29.chunk.js.map",
+    "main.js": "/a1-car-app/static/js/main.fd925350.chunk.js",
+    "main.js.map": "/a1-car-app/static/js/main.fd925350.chunk.js.map",
     "runtime-main.js": "/a1-car-app/static/js/runtime-main.bf7fb995.js",
     "runtime-main.js.map": "/a1-car-app/static/js/runtime-main.bf7fb995.js.map",
     "static/js/2.6e32b466.chunk.js": "/a1-car-app/static/js/2.6e32b466.chunk.js",
@@ -15,7 +15,7 @@
     "static/js/5.0d918e7e.chunk.js": "/a1-car-app/static/js/5.0d918e7e.chunk.js",
     "static/js/5.0d918e7e.chunk.js.map": "/a1-car-app/static/js/5.0d918e7e.chunk.js.map",
     "index.html": "/a1-car-app/index.html",
-    "precache-manifest.5df59f3677ff75eb98baa5440140494b.js": "/a1-car-app/precache-manifest.5df59f3677ff75eb98baa5440140494b.js",
+    "precache-manifest.37db927c0d6252df3da6e9badae2b050.js": "/a1-car-app/precache-manifest.37db927c0d6252df3da6e9badae2b050.js",
     "service-worker.js": "/a1-car-app/service-worker.js",
     "static/css/3.f31d8175.chunk.css.map": "/a1-car-app/static/css/3.f31d8175.chunk.css.map",
     "static/css/main.38a58737.chunk.css.map": "/a1-car-app/static/css/main.38a58737.chunk.css.map",
@@ -25,6 +25,6 @@
     "static/js/runtime-main.bf7fb995.js",
     "static/js/2.6e32b466.chunk.js",
     "static/css/main.38a58737.chunk.css",
-    "static/js/main.f2e50d29.chunk.js"
+    "static/js/main.fd925350.chunk.js"
   ]
 }

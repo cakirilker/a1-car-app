@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1b0b2d4cd99c08924fa9585dd3c2c608",
+    "revision": "decab9c6606fcdd142e147567029f9e9",
     "url": "/a1-car-app/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/a1-car-app/static/css/3.f31d8175.chunk.css"
   },
   {
-    "revision": "ddbbe646c28723e68d39",
+    "revision": "eafe2bc3cb66cab584a6",
     "url": "/a1-car-app/static/css/main.38a58737.chunk.css"
   },
   {
@@ -32,8 +32,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/a1-car-app/static/js/5.0d918e7e.chunk.js"
   },
   {
-    "revision": "ddbbe646c28723e68d39",
-    "url": "/a1-car-app/static/js/main.f2e50d29.chunk.js"
+    "revision": "eafe2bc3cb66cab584a6",
+    "url": "/a1-car-app/static/js/main.fd925350.chunk.js"
   },
   {
     "revision": "1f10be46d44cb43cfe7a",
