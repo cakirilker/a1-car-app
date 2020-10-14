@@ -10,6 +10,7 @@ import { Skeleton } from '@material-ui/lab';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Car } from '../constants/interfaces';
+import CarThumbnailPlaceholder from '../images/car-thumbnail-placeholder.png';
 
 interface Props {
   item: Car;
@@ -82,6 +83,12 @@ export const CarListItem = ({ item }: Props) => {
         className={classes.image}
         image={pictureUrl}
         data-testid="car-list-item-image"
+        alt="Car Thumbnail"
+        title="Car Thumbnail"
+        component="img"
+        onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) =>
+          ((e.target as HTMLImageElement).src = CarThumbnailPlaceholder)
+        }
       />
       <CardContent className={classes.content}>
         <Typography className={classes.heading} variant="h6">
