@@ -61,8 +61,10 @@ export const CarList = ({
     event: React.ChangeEvent<unknown>,
     value: number,
   ) => {
-    setFilters({ page: value });
-    fetchCars({ ...filters, page: value });
+    if (page !== value) {
+      setFilters({ page: value });
+      fetchCars({ ...filters, page: value });
+    }
   };
 
   return (

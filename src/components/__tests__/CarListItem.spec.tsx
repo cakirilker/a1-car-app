@@ -1,4 +1,4 @@
-import { render, RenderResult } from '@testing-library/react';
+import { render, RenderResult, screen } from '@testing-library/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Car } from '../../constants/interfaces';
@@ -44,8 +44,9 @@ describe('CarListItem Component', () => {
 
   test('should have correct image url for the car', () => {
     const { queryByTestId } = context;
-    expect(queryByTestId('car-list-item-image')).toHaveStyle(
-      `background-image: url("${car.pictureUrl}");`,
+    expect(queryByTestId('car-list-item-image')).toHaveAttribute(
+      'src',
+      car.pictureUrl,
     );
   });
 });
