@@ -1,11 +1,10 @@
 pipeline {
-    agent { dockerfile true }
-    stages {
-        stage('Verify Environment') {
-            steps {
-                sh 'node --version'
-            }
+    agent {
+        dockerfile {
+            label "docker"
         }
+    }
+    stages {
         stage('Install Packages') {
             steps {
                 sh "yarn install --frozen-lockfile --non-interactive"
