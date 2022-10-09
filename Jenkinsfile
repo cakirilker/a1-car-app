@@ -1,6 +1,7 @@
 pipeline {
-    agent docker { image 'node:14.15.5-alpine3.13' }
-
+    agent {
+        docker { image 'node:14.15.5-alpine3.13' }
+    }
     stages {
         stage('Verify Environment') {
             steps {
