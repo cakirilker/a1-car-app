@@ -3,10 +3,7 @@ pipeline {
     stages {
         stage('Install Packages') {
             steps {
-                script {
-                    slackSend "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
-                    sh "yarn install --frozen-lockfile --non-interactive"
-                }
+                sh "yarn install --frozen-lockfile --non-interactive"
             }
         }
         stage('Unit Tests') {
@@ -23,6 +20,15 @@ pipeline {
             steps {
                 sh "yarn build"
             }
+        }
+        
+    }
+    post {
+        success {
+            slackSend channel: "#world-hello", message: "Build deployed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+        }
+        failure {
+            slackSend channel: "#world-hello", failOnError:true, message:"Build failed  - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
         }
     }
 }
