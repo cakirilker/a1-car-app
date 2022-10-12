@@ -3,9 +3,10 @@ pipeline {
     stages {
         stage('Install Packages') {
             steps {
-slackSend "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
-
-                sh "yarn install --frozen-lockfile --non-interactive"
+                script {
+                    slackSend "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                    sh "yarn install --frozen-lockfile --non-interactive"
+                }
             }
         }
         stage('Unit Tests') {
